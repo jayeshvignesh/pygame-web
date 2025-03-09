@@ -11,10 +11,10 @@ pygame.display.set_caption("Galaxy Fighters")
 
 BORDER = pygame.Rect(WIDTH//2 - 10//2, 0, 10, HEIGHT)
 
-BULLET_HIT_SOUND = pygame.mixer.Sound(os.path.join("Assets", "Grenade+1.mp3"))
-BULLET_FIRE_SOUND = pygame.mixer.Sound(os.path.join("Assets", "Gun+Silencer.mp3"))
-STAGE_SOUND = pygame.mixer.Sound(os.path.join("Assets", "bomberman_stage.mp3.mp3"))
-FINAL_SONG = pygame.mixer.Sound(os.path.join("Assets", "game_over.mp3"))
+BULLET_HIT_SOUND = pygame.mixer.Sound(os.path.join("Assets", "Grenade+1.ogg"))
+BULLET_FIRE_SOUND = pygame.mixer.Sound(os.path.join("Assets", "Gun+Silencer.ogg"))
+STAGE_SOUND = pygame.mixer.Sound(os.path.join("Assets", "bomberman_stage.mp3.ogg"))
+FINAL_SONG = pygame.mixer.Sound(os.path.join("Assets", "game_over.ogg"))
 
 HEALTH_FONT = pygame.font.SysFont("comicsans", 40)
 WINNER_FONT = pygame.font.SysFont("comicsans", 100)
