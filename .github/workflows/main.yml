@@ -31,23 +31,25 @@ jobs:
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r requirements.txt --user
   
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.19.0'
+        # Crucial Fix: Upgraded Flutter version to match what Flet 0.86+ expects
+        flutter-version: '3.44.4'
 
     - name: Flet Build Web
       run: |
         echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}, USER: ${GITHUB_REPOSITORY%/*}, PROJECT_BASE_URL: ${GITHUB_REPOSITORY#*/}"
-        # Added a leading slash to the base url for accurate routing path maps
-        flet build web --base-url "/${GITHUB_REPOSITORY#*/}" --route-url-strategy hash
+        export PATH=$PATH:$HOME/.local/bin
+        
+        # Crucial Fix: Appended --no-interactive to force non-blocking head execution
+        python -m flet build web --base-url "/${GITHUB_REPOSITORY#*/}" --route-url-strategy hash --no-interactive
 
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        # Crucial Fix: Removed custom name parameter to default to the mandatory 'github-pages' name
         path: build/web
 
   deploy:
@@ -69,7 +71,6 @@ jobs:
       - name: Deploy to GitHub Pages 🚀
         if: github.event_name == 'push'
         id: deployment
-        # Crucial Fix: Removed custom artifact_name mapping to auto-bind to the standard 'github-pages' target
         uses: actions/deploy-pages@v4
 
 # name: Web Build + Deployment to GitHub Pages 
