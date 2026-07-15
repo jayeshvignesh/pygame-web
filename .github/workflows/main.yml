@@ -1,4 +1,4 @@
-yamlname: Web Build + Deployment to GitHub Pages 
+name: Web Build + Deployment to GitHub Pages 
 
 on:
   push:
